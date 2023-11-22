@@ -9,15 +9,21 @@ type OrderInput struct {
 }
 
 type OrderOutput struct {
-	ID    		 string
-	Price 		 float64
-	Tax   		 float64
+	ID         string
+	Price      float64
+	Tax        float64
 	FinalPrice float64
 }
 
 // SOLID - "D" - Dependency Inversion Principle
 type CalculateFinalPrice struct {
 	OrderRepository entity.OrderRepositoryInterface
+}
+
+func NewCalculateFinalPrice(orderRepository entity.OrderRepositoryInterface) *CalculateFinalPrice {
+	return &CalculateFinalPrice{
+		OrderRepository: orderRepository,
+	}
 }
 
 func (c *CalculateFinalPrice) Execute(input OrderInput) (*OrderOutput, error) {
@@ -34,9 +40,9 @@ func (c *CalculateFinalPrice) Execute(input OrderInput) (*OrderOutput, error) {
 		return nil, err
 	}
 	return &OrderOutput{
-		ID: order.ID,
-		Price: order.Price,
-		Tax: order.Tax,
+		ID:         order.ID,
+		Price:      order.Price,
+		Tax:        order.Tax,
 		FinalPrice: order.FinalPrice,
 	}, nil
 }
