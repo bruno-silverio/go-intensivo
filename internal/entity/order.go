@@ -6,3 +6,7 @@ type Order struct {
 	Tax        float64
 	FinalPrice float64
 }
+
+func (o *Order) CalculateFinalPrice() {
+	o.FinalPrice = o.Price + o.Tax
+}
