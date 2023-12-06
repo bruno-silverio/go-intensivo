@@ -10,6 +10,11 @@ type OrderRepository struct {
 	Db *sql.DB
 }
 
+// GetTotal implements entity.OrderRepositoryInterface.
+func (*OrderRepository) GetTotal() (int, error) {
+	panic("unimplemented")
+}
+
 func NewOrderRepository(db *sql.DB) *OrderRepository {
 	return &OrderRepository{
 		Db: db,
